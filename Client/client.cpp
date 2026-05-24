@@ -121,13 +121,35 @@ int main() {
         // =====================
 
         case 4: {
-
-            cout << "Sort Product"
+        
+            Node* temp =
+                productList.getHead();
+        
+            Product arr[100];
+        
+            int n = 0;
+        
+            // Linked List -> Array
+            while(temp != NULL) {
+        
+                arr[n] = temp->data;
+        
+                temp = temp->next;
+        
+                n++;
+            }
+        
+            // Bubble Sort
+            bubbleSort(arr, n);
+        
+            cout << "===== SORTED PRODUCT ====="
                  << endl;
-
-            cout << "(Bubble Sort Placeholder)"
-                 << endl;
-
+        
+            for(int i = 0; i < n; i++) {
+        
+                arr[i].display();
+            }
+        
             break;
         }
 
