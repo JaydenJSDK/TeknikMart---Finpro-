@@ -2,21 +2,29 @@
 
 #include "menu.h"
 
+#include "../models/Product.h"
+
+#include "../structures/LinkedList.h"
+
+#include "../algorithms/Search.h"
+
 using namespace std;
 
 int main() {
 
-    string name;
-    string npm;
+    LinkedList productList;
+
+    string loginName;
+    string loginNPM;
 
     cout << "===== LOGIN ====="
          << endl;
 
     cout << "Input Name : ";
-    cin >> name;
+    getline(cin, loginName);
 
     cout << "Input NPM : ";
-    cin >> npm;
+    getline(cin, loginNPM);
 
     cout << "Login Success!"
          << endl;
@@ -29,42 +37,144 @@ int main() {
 
         cin >> choice;
 
+        cin.ignore();
+
         switch(choice) {
 
-        case 1:
-            cout << "Add Product"
-                 << endl;
-            break;
+        // =====================
+        // ADD PRODUCT
+        // =====================
 
-        case 2:
-            cout << "View Product"
-                 << endl;
-            break;
+        case 1: {
 
-        case 3:
-            cout << "Search Product"
-                 << endl;
-            break;
+            int id;
+            string name;
+            int price;
 
-        case 4:
+            cout << "===== ADD PRODUCT ====="
+                 << endl;
+
+            cout << "Input Product ID : ";
+            cin >> id;
+
+            cin.ignore();
+
+            cout << "Input Product Name : ";
+            getline(cin, name);
+
+            cout << "Input Product Price : ";
+            cin >> price;
+
+            Product p(
+                id,
+                name,
+                price
+            );
+
+            productList.insert(p);
+
+            cout << "Product Added!"
+                 << endl;
+
+            break;
+        }
+
+        // =====================
+        // VIEW PRODUCT
+        // =====================
+
+        case 2: {
+
+            cout << "===== PRODUCT LIST ====="
+                 << endl;
+
+            productList.display();
+
+            break;
+        }
+
+        // =====================
+        // SEARCH PRODUCT
+        // =====================
+
+        case 3: {
+
+            string keyword;
+
+            cout << "===== SEARCH PRODUCT ====="
+                 << endl;
+
+            cout << "Input Product Name : ";
+
+            getline(cin, keyword);
+
+            linearSearch(
+                productList,
+                keyword
+            );
+
+            break;
+        }
+
+        // =====================
+        // SORT PRODUCT
+        // =====================
+
+        case 4: {
+
             cout << "Sort Product"
                  << endl;
-            break;
 
-        case 5:
-            cout << "Chat Seller"
+            cout << "(Bubble Sort Placeholder)"
                  << endl;
+
             break;
+        }
+
+        // =====================
+        // CHAT SELLER
+        // =====================
+
+        case 5: {
+
+            string message;
+
+            cout << "===== CHAT SELLER ====="
+                 << endl;
+
+            cout << "Input Message : ";
+
+            getline(cin, message);
+
+            cout << "Message Sent : "
+                 << message
+                 << endl;
+
+            break;
+        }
+
+        // =====================
+        // LOGOUT
+        // =====================
 
         case 6:
+
             cout << "Logout Success!"
                  << endl;
+
             break;
 
+        // =====================
+        // INVALID
+        // =====================
+
         default:
+
             cout << "Invalid Menu!"
                  << endl;
         }
+
+        cout << endl;
 
     } while(choice != 6);
 
