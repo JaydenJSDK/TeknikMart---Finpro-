@@ -5,31 +5,18 @@
 using namespace std;
 
 class Product {
-
 private:
     int id;
     string name;
     int price;
-    int stock;
-    string sellerName;
 
 public:
-
     Product() {}
 
-    Product(
-        int i,
-        string n,
-        int p,
-        int s,
-        string seller
-    ) {
-
+    Product(int i, string n, int p) {
         id = i;
         name = n;
         price = p;
-        stock = s;
-        sellerName = seller;
     }
 
     int getId() {
@@ -44,25 +31,9 @@ public:
         return price;
     }
 
-    int getStock() {
-        return stock;
-    }
-
-    string getSeller() {
-        return sellerName;
-    }
-
-    void updateStock(int qty) {
-        stock -= qty;
-    }
-
     void display() {
-
-        cout << "ID      : " << id << endl;
-        cout << "Name    : " << name << endl;
-        cout << "Price   : Rp" << price << endl;
-        cout << "Stock   : " << stock << endl;
-        cout << "Seller  : " << sellerName << endl;
+        cout << id << " - " << name
+             << " - Rp" << price << endl;
     }
 };
 

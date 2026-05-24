@@ -1,4 +1,3 @@
-#ifndef SELLER_H
 #define SELLER_H
 
 #include "User.h"
@@ -12,10 +11,7 @@ public:
 
     void showMenu() override {
 
-        cout << "===== SELLER MENU =====" << endl;
-        cout << "1. Upload Product" << endl;
-        cout << "2. Update Stock" << endl;
-        cout << "3. Logout" << endl;
+        cout << "Seller Menu" << endl;
     }
 };
 

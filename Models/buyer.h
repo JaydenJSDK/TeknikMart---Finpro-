@@ -12,11 +12,17 @@ public:
 
     void showMenu() override {
 
-        cout << "===== BUYER MENU =====" << endl;
-        cout << "1. Search Product" << endl;
-        cout << "2. Buy Product" << endl;
-        cout << "3. Sort Product" << endl;
-        cout << "4. Logout" << endl;
+        cout << "===== BUYER MENU ====="
+             << endl;
+
+        cout << "1. Search Product"
+             << endl;
+
+        cout << "2. Buy Product"
+             << endl;
+
+        cout << "3. Logout"
+             << endl;
     }
 };
 
