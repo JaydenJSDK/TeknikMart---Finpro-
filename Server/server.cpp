@@ -1,41 +1,45 @@
 #include <iostream>
-#include <winsock2.h>
-#pragma comment(lib,"ws2_32.lib")
+#include <thread>
+
+#include "server_handler.h"
+
+#include "../networking/SocketManager.h"
 
 using namespace std;
 
 int main() {
-    WSADATA ws;
-    WSAStartup(MAKEWORD(2,2), &ws);
 
-    SOCKET serverSocket;
+    SOCKET serverSocket =
+        SocketManager::createServer(
+            8080
+        );
 
-    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    cout << "Server Running..."
+         << endl;
 
-    sockaddr_in server;
+    while(true) {
 
-    server.sin_family = AF_INET;
-    server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons(8080);
+        SOCKET clientSocket =
+            accept(
+                serverSocket,
+                NULL,
+                NULL
+            );
 
-    bind(serverSocket, (sockaddr*)&server, sizeof(server));
+        cout << "Client Connected!"
+             << endl;
 
-    listen(serverSocket, 3);
+        thread t(
+            ServerHandler::handleClient,
+            clientSocket
+        );
 
-    cout << "Server Running..." << endl;
-
-    SOCKET clientSocket;
-
-    clientSocket = accept(serverSocket, NULL, NULL);
-
-    cout << "Client Connected" << endl;
-
-    char buffer[1024];
-
-    recv(clientSocket, buffer, sizeof(buffer), 0);
-
-    cout << buffer << endl;
+        t.detach();
+    }
 
     closesocket(serverSocket);
+
     WSACleanup();
+
+    return 0;
 }
