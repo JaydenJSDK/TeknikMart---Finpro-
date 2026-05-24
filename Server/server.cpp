@@ -1,5 +1,4 @@
 #include <iostream>
-#include <thread>
 
 #include "server_handler.h"
 
@@ -29,12 +28,9 @@ int main() {
         cout << "Client Connected!"
              << endl;
 
-        thread t(
-            ServerHandler::handleClient,
+        ServerHandler::handleClient(
             clientSocket
-        );
-
-        t.detach();
+);
     }
 
     closesocket(serverSocket);
